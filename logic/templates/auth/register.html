@@ -1,0 +1,32 @@
+{% extends 'layout.html' %}
+{% load bootstrap5 %}
+
+{% block content %}
+   
+   
+    <div class="">
+        <div class="d-flex justify-content-center align-items-center my-3 reg ">
+          <div class="register p-4">
+              <strong>
+                  <p class="insta h1 text-center my-2" > HJ Instagram</p>
+              </strong>
+              <b><p class="text-center text-muted">Sign up to see photos <br> and videos from your friends.</p>
+              </b>
+            <form method='post' >
+                {%csrf_token%}
+                {% bootstrap_form register_form layout='inline' %}
+                <p class="text-center text-muted fs-6">People who use our service may have uploaded <br>
+                    your contact information to Instagram. <b>Learn <br> more</b></p>
+   
+                <button class="btn btn-primary form-control my-3" type="submit">Sign up</button>
+            </form>
+                <p class="text-center text-muted ">If you already have an account, <a href="/login">login</a>  instead.</p>
+        
+                </div>
+            
+        </div>
+   
+    </div>
+   
+
+{% endblock %}

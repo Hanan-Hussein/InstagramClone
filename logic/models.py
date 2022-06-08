@@ -29,3 +29,33 @@ class Profile(models.Model):
     def delete_profile(cls, profile):
         cls.delete(profile)
 
+
+class Image(models.Model):
+    name = models.CharField(max_length=40, null=False)
+    image = CloudinaryField("image")
+    user = models.ForeignKey(User, on_delete=models.CASCADE,related_name="Images")
+    pub_date = models.DateTimeField(auto_now_add=True)
+    caption = models.CharField(max_length=80, null=False)
+
+    def __str__(self):
+        return self.name
+
+    @classmethod
+    def save_image(cls, image):
+        cls.save()
+
+    @classmethod
+    def delete_image(cls, image_id):
+        cls.delete(id=image_id)
+
+    @classmethod
+    def update_caption(cls, caption):
+        cls.update(caption=caption)
+    
+    @classmethod
+    def search_images(cls, caption):
+        """
+        search for an image by category
+        """
+        img = cls.objects.filter(caption__icontains=caption)
+        return img

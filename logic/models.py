@@ -59,3 +59,7 @@ class Image(models.Model):
         """
         img = cls.objects.filter(caption__icontains=caption)
         return img
+
+class Followers(models.Model):
+    followers = models.ForeignKey(User, related_name='followers',on_delete=models.CASCADE)
+    followed=models.ForeignKey(User,related_name='followed',on_delete=models.CASCADE)

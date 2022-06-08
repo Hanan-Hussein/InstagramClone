@@ -67,3 +67,8 @@ class Followers(models.Model):
 class Like(models.Model):
     post = models.ForeignKey(Image, related_name='likes',on_delete=models.CASCADE)
     lovers = models.ForeignKey(User, related_name='posts_liked',on_delete=models.CASCADE)
+
+class Comments(models.Model):
+    comments = models.CharField(max_length=50, null=False)
+    image_comment = models.ForeignKey(Image, related_name='comment_image',on_delete=models.CASCADE)
+    user=models.ForeignKey(User, related_name='posts_comments',on_delete=models.CASCADE)

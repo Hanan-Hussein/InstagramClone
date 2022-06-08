@@ -63,3 +63,7 @@ class Image(models.Model):
 class Followers(models.Model):
     followers = models.ForeignKey(User, related_name='followers',on_delete=models.CASCADE)
     followed=models.ForeignKey(User,related_name='followed',on_delete=models.CASCADE)
+
+class Like(models.Model):
+    post = models.ForeignKey(Image, related_name='likes',on_delete=models.CASCADE)
+    lovers = models.ForeignKey(User, related_name='posts_liked',on_delete=models.CASCADE)

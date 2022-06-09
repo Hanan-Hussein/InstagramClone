@@ -3,12 +3,12 @@
     padding:0;
     box-sizing: border-box;
 }
-.full-page {
+/* .full-page {
     width: 100vw !important;
     height: 100vh !important;
     overflow-y: hidden !important;
-    /* position: fixed !important; */
-}
+    position: fixed !important;
+} */
 
 ::-webkit-scrollbar {
     display: none !important;

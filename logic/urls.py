@@ -1,6 +1,7 @@
 from django.urls import path
 from . import views
 
+
 urlpatterns = [
     path('', views.home, name='home'),
     path("register", views.register_request, name="register"),
@@ -12,6 +13,6 @@ urlpatterns = [
     path('follow/<user_id>',views.followers, name='follow'),
     path('explore',views.explore, name='explore'),
     path('likes/<post_id>', views.likes, name='likes'),
-    path('search/',views.search_results,name='searchResults')
-
+    path('search/',views.search_results,name='searchResults'),
+    path('comments/<post_id>', views.comments, name='comments'),
 ]

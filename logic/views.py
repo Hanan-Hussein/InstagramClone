@@ -10,7 +10,6 @@ from .models import Image, Profile, Followers, Like, Comments
 from django.contrib.auth.models import User
 from django.views.decorators.csrf import csrf_exempt
 
-# Create your views here.
 
 @login_required
 def home(request):
@@ -33,6 +32,14 @@ def home(request):
 
     return render(request, 'home.html', {"posts": posts, "user_display": user_display, "users": users, "followed": followed, "followers_posts": followers_posts},)
 
+
+@login_required
+def explore(request):
+    posts = Image.objects.all()
+    user_display = request.user
+    return render(request, 'explore.html', {"posts": posts, "user_display": user_display})
+
+
 def register_request(request):
     if request.method == "POST":
         form = NewUserForm(request.POST)
@@ -44,6 +51,7 @@ def register_request(request):
             request, "Unsuccessful registration. Invalid information.")
     form = NewUserForm()
     return render(request, template_name="auth/register.html", context={"register_form": form})
+
 
 def login_request(request):
     if request.method == "POST":
@@ -62,11 +70,7 @@ def login_request(request):
     }
     return render(request, 'auth/login.html', context=context)
 
-@login_required
-def explore(request):
-    posts = Image.objects.all()
-    user_display = request.user
-    return render(request, 'explore.html', {"posts": posts, "user_display": user_display})
+
 @login_required
 def image_upload(request):
     user_display = request.user
@@ -89,9 +93,13 @@ def image_upload(request):
         "user_display": user_display
     }
     return render(request, 'upload.html', context=context)
+
+
 def logout_request(request):
     logout(request)
     return redirect('login')
+
+
 @login_required
 def profile(request):
     user_display = request.user
@@ -106,6 +114,7 @@ def profile(request):
         "user_display": user_display
     }
     return render(request, 'profile.html', context=context)
+
 
 @login_required
 def profile_edit(request):
@@ -136,6 +145,7 @@ def profile_edit(request):
     }
     return render(request, 'profile_edit.html', context=context)
 
+
 @login_required
 def followers(request, user_id):
     current_user = request.user
@@ -149,6 +159,7 @@ def followers(request, user_id):
         new_follower = Followers(followers=current_user, followed=other_user)
         new_follower.save()
     return redirect("home")
+
 
 @csrf_exempt
 @login_required
@@ -178,6 +189,7 @@ def search_results(request):
     else:
         message = "You haven't searched for any term"
         return render(request, 'search_results.html', {"message": message, "image": image})
+
 
 @login_required
 def comments(request, post_id):

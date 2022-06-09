@@ -1,6 +1,7 @@
 from django.db import models
 from cloudinary.models import CloudinaryField
 from django.contrib.auth.models import User
+
 # Create your models here.
 
 
@@ -63,6 +64,7 @@ class Image(models.Model):
 class Followers(models.Model):
     followers = models.ForeignKey(User, related_name='followers',on_delete=models.CASCADE)
     followed=models.ForeignKey(User,related_name='followed',on_delete=models.CASCADE)
+
 
 class Like(models.Model):
     post = models.ForeignKey(Image, related_name='likes',on_delete=models.CASCADE)

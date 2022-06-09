@@ -12,10 +12,6 @@ class Profile(models.Model):
     
 
     def __str__(self):
-        return f"Profile: {self.username} : email: {self.email} : profile: {self.profilephoto} : category: {self.bio}"
-
-
-    def __str__(self):
         return self.user.username
 
     @classmethod

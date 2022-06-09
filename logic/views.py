@@ -135,3 +135,18 @@ def profile_edit(request):
         'number': len(Image.objects.all().filter(user=request.user.id))
     }
     return render(request, 'profile_edit.html', context=context)
+
+@login_required
+def followers(request, user_id):
+    current_user = request.user
+    other_user = User.objects.get(id=user_id)
+    followers = Followers.objects.filter(
+        followers=current_user, followed=other_user)
+
+    if followers:
+        followers.delete()
+    else:
+        new_follower = Followers(followers=current_user, followed=other_user)
+        new_follower.save()
+    return redirect("home")
+

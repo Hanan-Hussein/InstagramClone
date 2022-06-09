@@ -89,3 +89,6 @@ def image_upload(request):
         "user_display": user_display
     }
     return render(request, 'upload.html', context=context)
+def logout_request(request):
+    logout(request)
+    return redirect('login')

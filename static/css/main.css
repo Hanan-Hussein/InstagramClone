@@ -1,14 +1,9 @@
-*{
-    margin:0;
-    padding:0;
-    box-sizing: border-box;
-}
-/* .full-page {
+.full-page {
     width: 100vw !important;
     height: 100vh !important;
-    overflow-y: hidden !important;
-    position: fixed !important;
-} */
+    overflow-y: scroll !important;
+    /* position: fixed !important; */
+}
 
 ::-webkit-scrollbar {
     display: none !important;
@@ -69,6 +64,15 @@ body {
     overflow: hidden;
     position: relative;
     width: 2rem;
+}
+.bit-img3 {
+    border-radius: 50%;
+    box-sizing: border-box;
+    height: 3rem;
+    margin: 0 auto;
+    overflow: hidden;
+    position: relative;
+    width: 3rem;
 }
 
 .bit-img2 {
@@ -151,6 +155,6 @@ body {
 }
 .c-height{
     height: 65vh !important;
-    overflow: hidden !important;
+    overflow: scroll !important;
 
 }

@@ -2,8 +2,9 @@
 ### By Hanan Hussein
 ### [Live Site](https://hjgallery.herokuapp.com/) 
 
+<img width="1440" alt="Screenshot 2022-06-09 at 13 03 43" src="https://user-images.githubusercontent.com/36597096/172832518-c4566fb8-6c36-4a30-9b8e-ca39badc6559.png">
 
-<img width="1440" alt="Screenshot 2022-06-01 at 12 00 20" src="https://user-images.githubusercontent.com/36597096/171379420-92f42c14-46eb-439a-9202-ff2aee2a0eb3.png">
+
 
 ## Description 
 This is an instagram clone where users can sign up, login , create posts, like, comment and follow other users. Users can also edit their profile information including their profile picture

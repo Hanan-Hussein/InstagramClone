@@ -62,3 +62,8 @@ def login_request(request):
     }
     return render(request, 'auth/login.html', context=context)
 
+@login_required
+def explore(request):
+    posts = Image.objects.all()
+    user_display = request.user
+    return render(request, 'explore.html', {"posts": posts, "user_display": user_display})

@@ -92,3 +92,46 @@ def image_upload(request):
 def logout_request(request):
     logout(request)
     return redirect('login')
+@login_required
+def profile(request):
+    user_display = request.user
+
+    current_user = request.user
+    posts = Image.objects.all().filter(user=request.user.id)
+    number = len(posts)
+    context = {
+        "user_details": current_user.profile,
+        "posts": posts,
+        "number": number,
+        "user_display": user_display
+    }
+    return render(request, 'profile.html', context=context)
+
+@login_required
+def profile_edit(request):
+    user_display = request.user
+    if request.method == 'POST':
+        form = ProfileEditForm(request.POST, request.FILES)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            email = form.cleaned_data['email']
+            bio = form.cleaned_data['bio']
+            profilephoto = form.cleaned_data['profilephoto']
+            profile = Profile.objects.get(id=request.user.id)
+            profile.profilephoto = profilephoto
+            profile.bio = bio
+            profile.save()
+            User.objects.filter(id=request.user.id).update(
+                email=email, username=username)
+            return redirect('profile')
+    current_user = request.user
+    user_profile = Profile.objects.all().filter(
+        user=current_user).first()
+    form = ProfileEditForm()
+    context = {
+        "user_details": user_profile,
+        "form": form,
+        "user_display": user_display,
+        'number': len(Image.objects.all().filter(user=request.user.id))
+    }
+    return render(request, 'profile_edit.html', context=context)

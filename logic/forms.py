@@ -36,3 +36,17 @@ class LoginForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ('username', 'password')
+class ImageForm(forms.ModelForm):
+    name = forms.CharField(max_length=40)
+    image = forms.ImageField()
+    caption = forms.CharField(max_length=80)
+
+    class Meta:
+        model = Image
+        fields = ('name', 'image', 'caption')
+    name.widget.attrs.update(
+        {'class': 'form-control m-2 w-100 input-val', 'placeholder': 'Enter Image name'})
+    caption.widget.attrs.update(
+        {'class': 'form-control m-2  input-val', 'placeholder': 'Enter the caption'})
+    image.widget.attrs.update(
+        {'class': 'form-control m-2  input-val', 'placeholder': 'Enter Image'})

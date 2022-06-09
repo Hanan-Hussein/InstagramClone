@@ -1,6 +1,6 @@
 #  Istagram Clone
 ### By Hanan Hussein
-### [Live Site](https://hjgallery.herokuapp.com/) 
+### [Live Site](https://hjinstaclone.herokuapp.com) 
 
 <img width="1440" alt="Screenshot 2022-06-09 at 13 03 43" src="https://user-images.githubusercontent.com/36597096/172832518-c4566fb8-6c36-4a30-9b8e-ca39badc6559.png">
 

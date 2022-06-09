@@ -150,3 +150,18 @@ def followers(request, user_id):
         new_follower.save()
     return redirect("home")
 
+@csrf_exempt
+@login_required
+def likes(request, post_id):
+    current_user = request.user
+    current_user_like = Like.objects.all().filter(
+        lovers_id=current_user.id, post_id=post_id)
+    if current_user_like.first():
+        current_user_like.delete()
+
+    else:
+        new = Like(lovers_id=current_user.id, post_id=post_id)
+        new.save()
+    number = str(Like.objects.filter(post_id=post_id).count())
+
+    return HttpResponse(number)

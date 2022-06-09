@@ -178,3 +178,25 @@ def search_results(request):
     else:
         message = "You haven't searched for any term"
         return render(request, 'search_results.html', {"message": message, "image": image})
+
+@login_required
+def comments(request, post_id):
+    posts = Image.objects.filter(id=post_id).first()
+    print(posts)
+    all_comments = Comments.objects.all().filter(image_comment=posts)
+   
+    if request.method == "POST":
+        form = CommentsForm(request.POST,request.FILES)
+
+        if form.is_valid():
+            comment = form.cleaned_data['comments']
+            form=Comments(comments=comment,image_comment=posts,user=request.user)
+            form.save()
+    form = CommentsForm()
+
+    context ={
+        "posts": posts,
+        "form": form,
+        "all_comments": all_comments
+    }
+    return render(request, 'comments.html',context=context)

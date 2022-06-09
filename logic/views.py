@@ -11,6 +11,28 @@ from django.contrib.auth.models import User
 from django.views.decorators.csrf import csrf_exempt
 
 # Create your views here.
+
+@login_required
+def home(request):
+    posts = Image.objects.all()
+    user_display = request.user
+    users = User.objects.all()
+    users = User.objects.all().exclude(id=request.user.id)
+    followers_posts = Image.objects.all()
+    followed = [i for i in User.objects.all() if Followers.objects.filter(
+        followers=request.user, followed=i)]
+    if followed:
+        for i in followed:
+
+            followers_posts = Image.objects.all().filter(user=i).order_by('pub_date')
+
+            followers_posts = Image.objects.all()
+    else:
+        followers_posts = Image.objects.all().filter(
+            user=request.user).order_by('pub_date')
+
+    return render(request, 'home.html', {"posts": posts, "user_display": user_display, "users": users, "followed": followed, "followers_posts": followers_posts},)
+
 def register_request(request):
     if request.method == "POST":
         form = NewUserForm(request.POST)

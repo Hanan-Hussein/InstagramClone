@@ -67,3 +67,25 @@ def explore(request):
     posts = Image.objects.all()
     user_display = request.user
     return render(request, 'explore.html', {"posts": posts, "user_display": user_display})
+@login_required
+def image_upload(request):
+    user_display = request.user
+    if request.method == 'POST':
+        form = ImageForm(request.POST, request.FILES)
+        if form.is_valid():
+            name = form.cleaned_data['name']
+            image = form.cleaned_data['image']
+            caption = form.cleaned_data['caption']
+
+            form = Image(name=name, image=image, caption=caption,
+                         user=request.user)
+            form.save()
+            messages.success(request, "Post created successful")
+            return redirect('home')
+    form = ImageForm()
+
+    context = {
+        "form": form,
+        "user_display": user_display
+    }
+    return render(request, 'upload.html', context=context)
